@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: elasticsearch-indices-7-days
+  namespace: efk
+spec:
+  schedule: "00 21 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: elasticsearch-indices-7-days
+        spec:
+          containers:
+          - name: es-cleaner
+            image: harbor.mateusmuller.me/mateusmullerme/es-worker
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
