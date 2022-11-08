@@ -1,0 +1,12 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+  name: elasticsearch-indices-days
+build:
+  artifacts:
+  - image: harbor.mateusmuller.me/mateusmullerme/es-worker
+    docker:
+      dockerfile: Dockerfile
+manifests:
+  rawYaml:
+  - job.yaml
